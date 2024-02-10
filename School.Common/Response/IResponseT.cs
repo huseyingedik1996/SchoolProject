@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace School.Common.Response
 {
-    internal interface IResponseT
+    public interface IResponse<T> : IResponse
     {
+        T Data { get; set; }
+
+        List<CustomValidationError> ValidationErrors { get; set; }
     }
 }

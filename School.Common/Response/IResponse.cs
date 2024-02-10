@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace School.Common.Response
 {
-    internal interface Interface1
+    public interface IResponse
     {
+        string Message { get; set; }
+
+        ResponseType ResponseType { get; set; }
     }
 }
