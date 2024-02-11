@@ -31,4 +31,4 @@ namespace School.Common.Response
         NotFound
     }
 }
-}
+

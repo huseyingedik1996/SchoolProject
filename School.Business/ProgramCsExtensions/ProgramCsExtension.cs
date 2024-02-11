@@ -21,7 +21,8 @@ namespace School.Business.ProgramCsExtensions
         {
             services.AddDbContext<SchoolContext>(opt =>
             {
-                opt.UseNpgsql("Host=localhost;Port=5432;Database=SchoolContextDb;Username=admin;Password=shaze");
+                //opt.UseNpgsql("Host=localhost;Port=5432;Database=SchoolContextDb;Username=admin;Password=shaze");
+                opt.UseSqlite("Data Source= school.db");
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace School.Dto.Dtos.ParentsDtos
 {
-    internal class ParentListDto
+    public class ParentListDto
     {
+        public int Id { get; set; }
+        public string ParentName { get; set; }
+        public string ParentSurname { get; set; }
+        public string ParentContact { get; set; }
+        public string Address { get; set; }
     }
 }
