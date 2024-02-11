@@ -98,7 +98,7 @@ namespace School.Business.Services
             }
             else
             {
-                return new ResponseT<List<StudentUpdateDto>>(ResponseType.NotFound, "Branch not found.");
+                return new ResponseT<List<StudentUpdateDto>>(ResponseType.NotFound, "Student not found.");
             }
         }
     }
