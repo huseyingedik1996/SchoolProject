@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
+using AutoMapper;
+using School.Business.Mapping;
 
 namespace School.Business.ProgramCsExtensions
 {
@@ -24,6 +26,15 @@ namespace School.Business.ProgramCsExtensions
                 //opt.UseNpgsql("Host=localhost;Port=5432;Database=SchoolContextDb;Username=admin;Password=shaze");
                 opt.UseSqlite("Data Source= school.db");
             });
+
+
+            var configuration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile(new SchoolProfile());
+            });
+
+            var mapper = configuration.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
