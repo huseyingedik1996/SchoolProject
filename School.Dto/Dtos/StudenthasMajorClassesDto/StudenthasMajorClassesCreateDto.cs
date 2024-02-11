@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace School.Dto.Dtos.StudenthasMajorClassesDto
 {
-    internal class StudenthasMajorClassesCreateDto
+    public class StudenthasMajorClassesCreateDto
     {
+        public int StudentsId { get; set; }
+        public int MajorhasClassesId { get; set; }
+
     }
 }

@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace School.Dto.Dtos
+namespace School.Dto.Dtos.StudenthasMajorClassesDto
 {
-    internal class StudenthasMajorClassesListDto
+    public class StudenthasMajorClassesListDto
     {
+        public int Id { get; set; }
+        public int StudentsId { get; set; }
+        public int MajorhasClassesId { get; set; }
+
     }
 }

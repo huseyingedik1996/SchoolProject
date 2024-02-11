@@ -8,6 +8,8 @@ namespace School.Dto.Dtos.MajorDtos
 {
     public class MajorUpdateDto
     {
+        public int Id { get; set; }
+
         public string MajorName { get; set; }
 
     }
