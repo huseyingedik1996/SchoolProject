@@ -20,6 +20,7 @@ namespace School.Dto.Dtos.StudentDto
         public string Contact { get; set; }
         public DateTime LastUpdate { get; set; }
         public DateTime RegisterDate { get; set; }
+        public int ParentId { get; set; }
 
     }
 }
