@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using School.Dto.Dtos.MajorDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace School.Business.Validations.MajorValidations
 {
-    internal class MajorUpdateValidations
+    public class MajorUpdateValidations : AbstractValidator<MajorUpdateDto>
     {
+        public MajorUpdateValidations()
+        {
+            RuleFor(x => x.MajorName).NotEmpty().WithMessage("This area can not be null.");
+        }
     }
 }
