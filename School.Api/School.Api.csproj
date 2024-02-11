@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\School.Business\School.Business.csproj" />
     <ProjectReference Include="..\School.DataAccess\School.DataAccess.csproj" />
+    <ProjectReference Include="..\School.Dto\School.Dto.csproj" />
   </ItemGroup>
 
 </Project>
