@@ -26,10 +26,10 @@ namespace School.DataAccess.Models
 
 
         public int AppUserId { get; set; }
-        public int ParentId { get; set; }
+        
         public AppUser AppUser { get; set; }
         public List<StudenthasMajorClass> StudenthasMajorClasses { get; set; }
-        public Parents Parent { get; set; }
+        
 
     }
 }

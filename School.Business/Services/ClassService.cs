@@ -20,10 +20,10 @@ namespace School.Business.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
-        private readonly IValidator<ClassCreateValidations> _createValidator;
+        private readonly IValidator<ClassCreateDto> _createValidator;
         private readonly IValidator<ClassUpdateDto> _updateValidator;
 
-        public ClassService(IMapper mapper, IUnitOfWork uow, IValidator<ClassCreateValidations> createValidator, IValidator<ClassUpdateDto> updateValidator)
+        public ClassService(IMapper mapper, IUnitOfWork uow, IValidator<ClassCreateDto> createValidator, IValidator<ClassUpdateDto> updateValidator)
         {
             _mapper = mapper;
             _uow = uow;
@@ -33,7 +33,7 @@ namespace School.Business.Services
 
         public async Task<IResponse<ClassCreateDto>> Create(ClassCreateDto createClass)
         {
-            var validationResult = _createValidator.Validate((IValidationContext)createClass);
+            var validationResult = _createValidator.Validate(createClass);
             if (validationResult.IsValid)
             {
                 await _uow.GetRepositores<Classes>().Create(_mapper.Map<Classes>(createClass));
@@ -81,7 +81,7 @@ namespace School.Business.Services
 
         public async Task<IResponse<List<ClassUpdateDto>>> UpdateDtos(ClassUpdateDto updateClass)
         {
-            var validationResult = _updateValidator.Validate((IValidationContext)updateClass);
+            var validationResult = _updateValidator.Validate(updateClass);
             if (!validationResult.IsValid)
             {
                 List<CustomValidationError> errors = validationResult.Errors.Select(error => new CustomValidationError
