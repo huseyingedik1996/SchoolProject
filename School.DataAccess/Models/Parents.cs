@@ -13,5 +13,8 @@ namespace School.DataAccess.Models
         public string ParentSurname { get; set; }
         public string ParentContact { get; set; }
         public string Address { get; set; }
+        public int StudentId { get; set; }
+        public Students Student { get; set; }
+
     }
 }
