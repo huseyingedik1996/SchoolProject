@@ -63,13 +63,14 @@ namespace School.Business.ProgramCsExtensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IClassesService, ClassService>();
 
 
             services.AddTransient<IValidator<StudentCreateDto>, StudentCreateValidations>();
             services.AddTransient<IValidator<StudentUpdateDto>, StudentUpdateValidations>();
 
-            services.AddTransient<IValidator<ClassCreateDto>, ClassCreateValidations > ();
-            services.AddTransient<IValidator<ClassUpdateDto>, ClassUpdateValidations > ();
+            services.AddTransient<IValidator<ClassCreateDto>, ClassCreateValidations>();
+            services.AddTransient<IValidator<ClassUpdateDto>, ClassUpdateValidations>();
 
             services.AddTransient<IValidator<MajorhasClassesCreateDto>, MajorhasClassCreateValidations>();
             services.AddTransient<IValidator<MajorhasClassesUpdateDto>, MajorhasClassUpdateValidations>();

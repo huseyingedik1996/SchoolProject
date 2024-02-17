@@ -14,5 +14,6 @@ namespace School.Dto.Dtos.ParentsDtos
         public string ParentContact { get; set; }
         public string Address { get; set; }
         public int StudentId { get; set; }
+
     }
 }

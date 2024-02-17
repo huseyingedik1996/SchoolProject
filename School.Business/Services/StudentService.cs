@@ -18,10 +18,10 @@ namespace School.Business.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
-        private readonly IValidator<StudentCreateValidations> _createValidator;
-        private readonly IValidator<StudentUpdateValidations> _updateValidator;
+        private readonly IValidator<StudentCreateDto> _createValidator;
+        private readonly IValidator<StudentUpdateDto> _updateValidator;
 
-        public StudentService(IMapper mapper, IUnitOfWork uow, IValidator<StudentCreateValidations> createValidator, IValidator<StudentUpdateValidations> updateValidator)
+        public StudentService(IMapper mapper, IUnitOfWork uow, IValidator<StudentCreateDto> createValidator, IValidator<StudentUpdateDto> updateValidator)
         {
             _mapper = mapper;
             _uow = uow;
@@ -31,7 +31,7 @@ namespace School.Business.Services
 
         public async Task<IResponse<StudentCreateDto>> Create(StudentCreateDto createStudent)
         {
-            var validationResult = _createValidator.Validate((IValidationContext)createStudent);
+            var validationResult = _createValidator.Validate(createStudent);
             if (validationResult.IsValid)
             {
                 await _uow.GetRepositores<Students>().Create(_mapper.Map<Students>(createStudent));
@@ -78,7 +78,7 @@ namespace School.Business.Services
 
         public async Task<IResponse<List<StudentUpdateDto>>> UpdateDtos(StudentUpdateDto updateStudent)
         {
-            var validationResult = _updateValidator.Validate((IValidationContext)updateStudent);
+            var validationResult = _updateValidator.Validate(updateStudent);
             if (!validationResult.IsValid)
             {
                 List<CustomValidationError> errors = validationResult.Errors.Select(error => new CustomValidationError
