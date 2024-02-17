@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Business", "School.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Common", "School.Common\School.Common.csproj", "{A39D9CA8-C654-4235-939B-6552144565E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Dto", "School.Dto\School.Dto.csproj", "{11E12A5B-4193-420E-A751-688CDF59B7BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Dto", "School.Dto\School.Dto.csproj", "{11E12A5B-4193-420E-A751-688CDF59B7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Mvc", "School.Mvc\School.Mvc.csproj", "{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{11E12A5B-4193-420E-A751-688CDF59B7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11E12A5B-4193-420E-A751-688CDF59B7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11E12A5B-4193-420E-A751-688CDF59B7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
