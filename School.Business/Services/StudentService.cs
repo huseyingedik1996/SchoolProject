@@ -3,6 +3,7 @@ using FluentValidation;
 using School.Business.Services.ServiceInterfaces;
 using School.Business.Validations.StudentValidations;
 using School.Common.Response;
+using School.DataAccess.Context;
 using School.DataAccess.Models;
 using School.DataAccess.Repositories;
 using School.Dto.Dtos.StudentDto;
@@ -20,13 +21,14 @@ namespace School.Business.Services
         private readonly IUnitOfWork _uow;
         private readonly IValidator<StudentCreateDto> _createValidator;
         private readonly IValidator<StudentUpdateDto> _updateValidator;
-
-        public StudentService(IMapper mapper, IUnitOfWork uow, IValidator<StudentCreateDto> createValidator, IValidator<StudentUpdateDto> updateValidator)
+        private readonly SchoolContext _context;
+        public StudentService(IMapper mapper, IUnitOfWork uow, IValidator<StudentCreateDto> createValidator, IValidator<StudentUpdateDto> updateValidator, SchoolContext context)
         {
             _mapper = mapper;
             _uow = uow;
             _createValidator = createValidator;
             _updateValidator = updateValidator;
+            _context = context;
         }
 
         public async Task<IResponse<StudentCreateDto>> Create(StudentCreateDto createStudent)
@@ -34,7 +36,29 @@ namespace School.Business.Services
             var validationResult = _createValidator.Validate(createStudent);
             if (validationResult.IsValid)
             {
+                createStudent.LastUpdate = DateTime.Now;
+                createStudent.RegisterDate = DateTime.Now;
+                createStudent.Age = DateTime.Now.Year - createStudent.BirthDay.Year;
+                createStudent.StudentNumber = GenerateUniqueStudentNumber();
+                createStudent.Email = ($"{createStudent.Name}{createStudent.Surname}@school.com");
+                createStudent.Password = GenerateUniqueStudentNumber().ToString();
+
+                
+
                 await _uow.GetRepositores<Students>().Create(_mapper.Map<Students>(createStudent));
+
+                await _uow.SaveChangesAsync();
+
+                var studentId = _context.Students.OrderByDescending(x => x.Id).FirstOrDefault();
+
+                RegisterInfo register = new()
+                {
+                    StudentId = studentId.Id,
+                    Email = createStudent.Email,
+
+                    Password = createStudent.Password,
+                };
+                await _uow.GetRepositores<RegisterInfo>().Create(register);
                 await _uow.SaveChangesAsync();
                 return new ResponseT<StudentCreateDto>(ResponseType.Success, createStudent);
             }
@@ -100,6 +124,18 @@ namespace School.Business.Services
             {
                 return new ResponseT<List<StudentUpdateDto>>(ResponseType.NotFound, "Student not found.");
             }
+        }
+
+        private int GenerateUniqueStudentNumber()
+        {
+            // You can implement your own logic to generate a unique student number
+            // For example, concatenate current timestamp and a random number
+            Random random = new Random();
+            int randomPart = random.Next(100000, 999999); // Change the range based on your requirements
+            
+            string uniqueStudentNumber = randomPart.ToString();
+
+            return int.Parse(uniqueStudentNumber);
         }
     }
 }

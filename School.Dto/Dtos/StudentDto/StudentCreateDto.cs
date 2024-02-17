@@ -8,9 +8,10 @@ namespace School.Dto.Dtos.StudentDto
 {
     public class StudentCreateDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int TCNumber { get; set; }
+        public string TCNumber { get; set; }
         public int StudentNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -20,6 +21,10 @@ namespace School.Dto.Dtos.StudentDto
         public string Contact { get; set; }
         public DateTime LastUpdate { get; set; }
         public DateTime RegisterDate { get; set; }
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
         
 
     }

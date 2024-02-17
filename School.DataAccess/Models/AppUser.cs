@@ -10,5 +10,6 @@ namespace School.DataAccess.Models
     public class AppUser : IdentityUser<int>
     {
         public Students Students { get; set; }
+        public int StudentsId { get; set; }
     }
 }
