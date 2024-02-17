@@ -19,6 +19,8 @@ namespace School.Business.Validations.StudentValidations
             RuleFor(x => x.BirthDay).NotEmpty().WithMessage("This area can not be null.");
             RuleFor(x => x.City).NotEmpty().WithMessage("This area can not be null.").Length(1, 25);
             RuleFor(x => x.Contact).NotEmpty().WithMessage("This area can not be null.").Length(1, 15);
+            RuleFor(x => x.TCNumber).NotEmpty().WithMessage("This are can not be null");
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.DataAccess.Context;
 
@@ -10,9 +11,11 @@ using School.DataAccess.Context;
 namespace School.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20240217135012_strTc")]
+    partial class strTc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -297,30 +300,6 @@ namespace School.DataAccess.Migrations
                     b.ToTable("Parents");
                 });
 
-            modelBuilder.Entity("School.DataAccess.Models.RegisterInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("RegistersInfo");
-                });
-
             modelBuilder.Entity("School.DataAccess.Models.StudenthasMajorClass", b =>
                 {
                     b.Property<int>("Id")
@@ -478,17 +457,6 @@ namespace School.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("School.DataAccess.Models.Parents", b =>
-                {
-                    b.HasOne("School.DataAccess.Models.Students", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("School.DataAccess.Models.RegisterInfo", b =>
                 {
                     b.HasOne("School.DataAccess.Models.Students", "Student")
                         .WithMany()

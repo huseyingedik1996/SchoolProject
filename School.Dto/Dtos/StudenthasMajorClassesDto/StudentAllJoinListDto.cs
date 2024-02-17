@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace School.DataAccess.Models
+namespace School.Dto.Dtos.StudenthasMajorClassesDto
 {
-    public class Students 
+    public class StudentAllJoinListDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,12 +19,19 @@ namespace School.DataAccess.Models
         public DateTime BirthDay { get; set; }
         public int Age { get; set; }
         public string Contact { get; set; }
-        public DateTime LastUpdate { get; set; }
         public DateTime RegisterDate { get; set; }
 
 
-        public AppUser AppUser { get; set; }
-        public List<StudenthasMajorClass> StudenthasMajorClasses { get; set; }
+        public int ParentId { get; set; }
+        public string ParentName { get; set; }
+        public string ParentSurname { get; set; }
+        public string ParentContact { get; set; }
+        public string ParentAddress { get; set; }
+        public int StudentId { get; set; }
+
+        public int ClassId { get; set; }
+
+        public string ClassName { get; set; }
 
     }
 }

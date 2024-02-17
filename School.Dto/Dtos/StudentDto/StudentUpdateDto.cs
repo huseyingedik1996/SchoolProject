@@ -11,7 +11,7 @@ namespace School.Dto.Dtos.StudentDto
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int TCNumber { get; set; }
+        public string TCNumber { get; set; }
         public int StudentNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
