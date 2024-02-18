@@ -12,7 +12,7 @@ namespace School.Business.Validations.MajorValidations
     {
         public MajorUpdateValidations()
         {
-            RuleFor(x => x.MajorName).NotEmpty().WithMessage("This area can not be null.");
+            RuleFor(x => x.MajorName).NotEmpty().WithMessage("Bu Alan Boş Geçilemez");
         }
     }
 }

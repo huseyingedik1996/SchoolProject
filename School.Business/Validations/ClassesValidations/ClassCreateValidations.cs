@@ -12,7 +12,7 @@ namespace School.Business.Validations.ClassesValidations
     {
         public ClassCreateValidations()
         {
-            RuleFor(x => x.ClassName).NotEmpty().WithMessage("This area can not be null");
+            RuleFor(x => x.ClassName).NotEmpty().WithMessage("Bu Alan Boş Geçilemez");
         }
     }
 }

@@ -12,8 +12,8 @@ namespace School.Business.Validations.MajorhasClassesValidations
     {
         public MajorhasClassUpdateValidations()
         {
-            RuleFor(x => x.ClassesId).NotEmpty().WithMessage("This area can not be null.");
-            RuleFor(x => x.MajorsId).NotEmpty().WithMessage("This area can not be null.");
+            RuleFor(x => x.ClassesId).NotEmpty().WithMessage("Bu Alan Boş Geçilemez");
+            RuleFor(x => x.MajorsId).NotEmpty().WithMessage("Bu Alan Boş Geçilemez");
         }
     }
 }

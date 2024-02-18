@@ -12,10 +12,10 @@ namespace School.Business.Validations.ParentsValidations
     {
         public ParentUpdateValidations()
         {
-            RuleFor(x => x.ParentName).NotEmpty().WithMessage("This area can not be null.").Length(1, 45);
-            RuleFor(x => x.ParentSurname).NotEmpty().WithMessage("This area can not be null.").Length(1, 45);
-            RuleFor(x => x.ParentContact).NotEmpty().WithMessage("This area can not be null.").MaximumLength(15);
-            RuleFor(x => x.Address).NotEmpty().WithMessage("This area can not be null.").MaximumLength(350);
+            RuleFor(x => x.ParentName).NotEmpty().WithMessage("Bu Alan Boş Geçilemez").Length(1, 45);
+            RuleFor(x => x.ParentSurname).NotEmpty().WithMessage("Bu Alan Boş Geçilemez").Length(1, 45);
+            RuleFor(x => x.ParentContact).NotEmpty().WithMessage("Bu Alan Boş Geçilemez").MaximumLength(15);
+            RuleFor(x => x.Address).NotEmpty().WithMessage("Bu Alan Boş Geçilemez").MaximumLength(350);
         }
     }
 }
