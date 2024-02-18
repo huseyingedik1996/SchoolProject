@@ -19,6 +19,6 @@ namespace School.Business.Services.ServiceInterfaces
 
         Task<IResponse> Remove(int id);
 
-        Task<IResponse<List<ClassUpdateDto>>> UpdateDtos(ClassUpdateDto updateClass);
+        Task<IResponse<ClassUpdateDto>> UpdateDtos(ClassUpdateDto updateClass);
     }
 }

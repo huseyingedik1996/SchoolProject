@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using School.Business.Extensions;
 using School.Business.Services.ServiceInterfaces;
 using School.Business.Validations.ClassesValidations;
 using School.Business.Validations.StudentValidations;
@@ -42,16 +43,7 @@ namespace School.Business.Services
             }
             else
             {
-                List<CustomValidationError> errors = new();
-                foreach (var error in validationResult.Errors)
-                {
-                    errors.Add(new()
-                    {
-                        ErrorMessage = error.ErrorMessage,
-                        PropertyName = error.PropertyName
-                    });
-                }
-                return new ResponseT<ClassCreateDto>(ResponseType.ValidationError, createClass, errors);
+                return new ResponseT<ClassCreateDto>(ResponseType.ValidationError,createClass, validationResult.CovertToCustomValidationError());
             }
         }
 
@@ -79,30 +71,27 @@ namespace School.Business.Services
             return new ResponseT<bool>(ResponseType.NotFound, $"{id} not found.");
         }
 
-        public async Task<IResponse<List<ClassUpdateDto>>> UpdateDtos(ClassUpdateDto updateClass)
+        public async Task<IResponse<ClassUpdateDto>> UpdateDtos(ClassUpdateDto updateClass)
         {
             var validationResult = _updateValidator.Validate(updateClass);
-            if (!validationResult.IsValid)
+            if (validationResult.IsValid)
             {
-                List<CustomValidationError> errors = validationResult.Errors.Select(error => new CustomValidationError
-                {
-                    ErrorMessage = error.ErrorMessage,
-                    PropertyName = error.PropertyName
-                }).ToList();
-                return new ResponseT<List<ClassUpdateDto>>(ResponseType.NotFound, "Student not found.");
-            }
+				var updatedEntity = await _uow.GetRepositores<Classes>().GetById(updateClass.Id);
+				if (updatedEntity != null)
+				{
+					_uow.GetRepositores<Classes>().Update(_mapper.Map<Classes>(updateClass), updatedEntity);
+					await _uow.SaveChangesAsync();
+					return new ResponseT<ClassUpdateDto>(ResponseType.Success, updateClass);
+				}
+				return new ResponseT<ClassUpdateDto>(ResponseType.NotFound, $"{updateClass.Id} ait data bulunamadı");
 
-            var updatedEntity = await _uow.GetRepositores<Classes>().GetById(updateClass.Id);
-            if (updatedEntity != null)
-            {
-                _uow.GetRepositores<Classes>().Update(_mapper.Map<Classes>(updateClass), updatedEntity);
-                await _uow.SaveChangesAsync();
-                return new ResponseT<List<ClassUpdateDto>>(ResponseType.Success, "Student updated successfully.");
-            }
-            else
-            {
-                return new ResponseT<List<ClassUpdateDto>>(ResponseType.NotFound, "Student not found.");
-            }
-        }
+			}
+			else
+			{
+				return new ResponseT<ClassUpdateDto>(ResponseType.ValidationError, updateClass, validationResult.CovertToCustomValidationError());
+			}
+
+
+		}
     }
 }

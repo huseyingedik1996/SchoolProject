@@ -13,6 +13,7 @@ namespace School.Business.Validations.ClassesValidations
         public ClassUpdateValidations()
         {
             RuleFor(x => x.ClassName).NotEmpty().WithMessage("Bu Alan Boş Geçilemez");
-        }
+			
+		}
     }
 }
