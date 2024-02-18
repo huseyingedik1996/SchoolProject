@@ -1,0 +1,26 @@
+﻿@model ApiClassUpdateModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<div id="oppositeFormTable" class="col-md-12">
+    <form method="post">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Sınıf Güncelleme İşlemi</div>
+            </div>
+            <div class="card-body">
+                <input type="hidden" asp-for="Data.Id" />
+                <div class="form-group">
+                    <label for="Data.ClassName">Sınıf Adını Giriniz</label>
+                    <input type="text" asp-for="Data.ClassName" class="form-control" id="Data.ClassName">
+                </div>
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </form>
+</div>

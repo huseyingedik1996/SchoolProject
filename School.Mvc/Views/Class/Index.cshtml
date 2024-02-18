@@ -2,13 +2,14 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
 }
 
 <div class="container">
     <table class="table">
         <thead>
-            <tr>
-                <th>ID</th>
+            <tr style="color:#fff">
+                <th>#</th>
                 <th>Class Name</th>
                 <th></th>
                 <th></th>
@@ -17,8 +18,9 @@
         <tbody>
             @foreach (var item in Model.Data)
             {
-                <tr>
-                    <td>@item.Id</td>
+                count++;
+                <tr style="color:#fff">
+                    <td>@count</td>
                     <td>@item.ClassName</td>
                     <td>
                         <form action="@Url.Action("Delete", "Class", new { id = item.Id })" method="post">
@@ -26,7 +28,7 @@
                         </form>
                     </td>
                     <td>
-                        <a href="@Url.Action("Edit", "Class", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
+                        <a href="@Url.Action("Update", "Class", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
                     </td>
                 </tr>
             }

@@ -92,10 +92,10 @@ namespace School.Business.Services
                 return new ResponseT<List<ClassUpdateDto>>(ResponseType.NotFound, "Student not found.");
             }
 
-            var updatedEntity = await _uow.GetRepositores<ClassUpdateDto>().GetById(updateClass.Id);
+            var updatedEntity = await _uow.GetRepositores<Classes>().GetById(updateClass.Id);
             if (updatedEntity != null)
             {
-                _uow.GetRepositores<ClassUpdateDto>().Update(_mapper.Map<ClassUpdateDto>(updateClass), updatedEntity);
+                _uow.GetRepositores<Classes>().Update(_mapper.Map<Classes>(updateClass), updatedEntity);
                 await _uow.SaveChangesAsync();
                 return new ResponseT<List<ClassUpdateDto>>(ResponseType.Success, "Student updated successfully.");
             }

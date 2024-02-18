@@ -89,10 +89,10 @@ namespace School.Business.Services
                 return new ResponseT<List<MajorhasClassesUpdateDto>>(ResponseType.NotFound, "MajorhasClass not found.");
             }
 
-            var updatedEntity = await _uow.GetRepositores<MajorhasClassesUpdateDto>().GetById(updateMajorhasClass.Id);
+            var updatedEntity = await _uow.GetRepositores<MajorhasClass>().GetById(updateMajorhasClass.Id);
             if (updatedEntity != null)
             {
-                _uow.GetRepositores<MajorhasClassesUpdateDto>().Update(_mapper.Map<MajorhasClassesUpdateDto>(updateMajorhasClass), updatedEntity);
+                _uow.GetRepositores<MajorhasClass>().Update(_mapper.Map<MajorhasClass>(updateMajorhasClass), updatedEntity);
                 await _uow.SaveChangesAsync();
                 return new ResponseT<List<MajorhasClassesUpdateDto>>(ResponseType.Success, "MajorhasClass updated successfully.");
             }

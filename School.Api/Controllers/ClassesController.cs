@@ -49,7 +49,7 @@ namespace School.Api.Controllers
         [HttpPut("Classes/update")]
         public async Task<IActionResult> Update(ClassUpdateDto updateDto)
         {
-            var updated = _service.UpdateDtos(updateDto);
+            await _service.UpdateDtos(updateDto);
             return Ok();
 
         }

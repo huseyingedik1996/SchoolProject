@@ -1,8 +1,24 @@
-﻿
+﻿@model ClassCreateModel
 @{
     ViewData["Title"] = "CreateClass";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateClass</h1>
-
+<div id="oppositeFormTable" class="col-md-12">
+	<form method="post">
+		<div class="card" >
+			<div class="card-header" >
+				<div class="card-title">Yeni Sınıf Girişi</div>
+			</div>
+			<div class="card-body" >
+				<div class="form-group">
+					<label for="ClassName">Kategori Adını Giriniz</label>
+					<input type="text" asp-for="ClassName" class="form-control" id="ClassName">
+				</div>
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Ekle</button>
+			</div>
+		</div>
+	</form>
+</div>
