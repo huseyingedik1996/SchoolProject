@@ -72,7 +72,7 @@ namespace School.Mvc.Controllers
 		public async Task<IActionResult> Update(int id)
 		{
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync($"http://localhost:5287/api/Majors/1{id}");
+			var responseMessage = await client.GetAsync($"http://localhost:5287/api/Majors/{id}");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();

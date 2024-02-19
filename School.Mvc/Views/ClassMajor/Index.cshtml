@@ -1,4 +1,4 @@
-﻿@model ApiClassListModel
+﻿@model List<ClasshasMajorListModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,36 +11,39 @@
             <tr style="color:#fff">
                 <th>#</th>
                 <th>Sınıf Adı</th>
+                <th>Bölüm Adı</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Data)
+            @foreach (var item in Model)
             {
                 count++;
                 <tr style="color:#fff">
                     <td>@count</td>
                     <td>@item.ClassName</td>
+                    <td>@item.MajorName</td>
                     <td>
-                        <form action="@Url.Action("Delete", "Class", new { id = item.Id })" method="post">
+                        <form action="@Url.Action("Delete", "ClassMajor", new { id = item.Id })" method="post">
                             <button type="submit" class="btn btn-danger">Sil</button>
                         </form>
                     </td>
                     <td>
-                        <a href="@Url.Action("Update", "Class", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
+                        <a href="@Url.Action("Update", "ClassMajor", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
                     </td>
                 </tr>
             }
             <tr>
                 <td colspan="4" class="text-left">
-                    <a href="@Url.Action("CreateClass", "Class")" class="btn btn-lg btn-success"
+                    <a href="@Url.Action("CreateClassMajor", "ClassMajor")" class="btn btn-lg btn-success"
                        onmouseover="this.classList.remove('btn-success'); this.classList.add('btn-secondary');"
                        onmouseout="this.classList.remove('btn-secondary'); this.classList.add('btn-success');">
-                        Sınıf Ekle
+                        Sınıf/Bölüm Oluştur
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+

@@ -1,8 +1,25 @@
-﻿
+﻿@model ApiMajorUpdateModel
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Update/Major</h1>
+<div id="oppositeFormTable" class="col-md-12">
+    <form method="post">
+        <div class="card-header">
+            <div class="card-title">Bölüm Güncelleme İşlemi</div>
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="Data.Id" />
+            <div class="form-group">
+                <label for="Data.ClassName"> Bölüm Adını Giriniz</label>
+                <input type="text" asp-for="Data.MajorName" class="form-control" id="Data.MajorName">
+                <span asp-validation-for="Data.MajorName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-action">
+            <button class="btn btn-success">Güncelle</button>
+        </div>
+    </form>
+</div>
 

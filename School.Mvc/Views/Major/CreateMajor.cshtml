@@ -1,8 +1,23 @@
-﻿
+﻿@model MajorCreateModel
 @{
     ViewData["Title"] = "CreateMajor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateMajor</h1>
-
+<div id="oppositeFormTable" class="col-md-12">
+    <form method="post">
+        <div class="card-header">
+            <div class="card-title">Yeni Bölüm Girişi</div>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="MajorName">Bölüm Adını Giriniz</label>
+                <input type="text" asp-for="MajorName" class="form-control" id="MajorName" />
+                <span  asp-validation-for="MajorName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-action">
+            <button class="btn btn-success">Ekle</button>
+        </div>
+    </form>
+</div>

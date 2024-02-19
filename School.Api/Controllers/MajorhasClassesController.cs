@@ -30,6 +30,13 @@ namespace School.Api.Controllers
             return Ok(list);
         }
 
+        [HttpGet("MajorhasClasses/getallef")]
+        public async Task<IActionResult> GetAllEf()
+        {
+            var list = await _service.GetAllEf();
+            return Ok(list);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

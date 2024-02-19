@@ -12,6 +12,7 @@ namespace School.Business.Services.ServiceInterfaces
     public interface IMajorhasClassService
     {
         Task<IResponse<List<MajorhasClassesLisrDto>>> GetAll();
+        Task<List<EfMajorhasClassListDto>> GetAllEf();
 
         Task<IResponse<MajorhasClassesCreateDto>> Create(MajorhasClassesCreateDto createDto);
 

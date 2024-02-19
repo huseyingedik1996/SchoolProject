@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using School.Business.Services.ServiceInterfaces;
 using School.Common.Response;
+using School.DataAccess.Context;
 using School.DataAccess.Models;
 using School.DataAccess.Repositories;
 using School.Dto.Dtos.ClassDtos;
@@ -20,13 +22,15 @@ namespace School.Business.Services
         private readonly IUnitOfWork _uow;
         private readonly IValidator<MajorhasClassesCreateDto> _createValidator;
         private readonly IValidator<MajorhasClassesUpdateDto> _updateValidator;
+        private readonly SchoolContext _context;
 
-        public MajorhasClassService(IMapper mapper, IUnitOfWork uow, IValidator<MajorhasClassesCreateDto> createValidator, IValidator<MajorhasClassesUpdateDto> updateValidator)
+        public MajorhasClassService(IMapper mapper, IUnitOfWork uow, IValidator<MajorhasClassesCreateDto> createValidator, IValidator<MajorhasClassesUpdateDto> updateValidator, SchoolContext context)
         {
             _mapper = mapper;
             _uow = uow;
             _createValidator = createValidator;
             _updateValidator = updateValidator;
+            _context = context;
         }
 
         public async Task<IResponse<MajorhasClassesCreateDto>> Create(MajorhasClassesCreateDto createMajorhasClass)
@@ -54,8 +58,30 @@ namespace School.Business.Services
         }
         public async Task<IResponse<List<MajorhasClassesLisrDto>>> GetAll()
         {
+            
             var data = _mapper.Map<List<MajorhasClassesLisrDto>>(await _uow.GetRepositores<MajorhasClass>().GetAll());
             return new ResponseT<List<MajorhasClassesLisrDto>>(ResponseType.Success, data);
+        }
+
+        public async Task<List<EfMajorhasClassListDto>> GetAllEf()
+        {
+            var list = await _context.MajorClasses
+                .Include(x => x.Majors)
+                .Include(x => x.Classes)
+                .ToListAsync();
+
+            var result = list.Select(x => new EfMajorhasClassListDto
+            {
+                Id = x.Id,
+
+                MajorsId = x.MajorsId,
+                MajorName = x.Majors.MajorName,
+
+                ClassesId = x.ClassesId,
+                ClassName = x.Classes.ClassName,
+            }).ToList();
+
+            return result;
         }
 
         public async Task<IResponse<MajorhasClassesLisrDto>> GetById(int id)

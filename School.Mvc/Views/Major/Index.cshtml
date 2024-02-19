@@ -1,8 +1,52 @@
-﻿
+﻿@model ApiMajorListModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
 }
 
-<h1>Major/Bölüm</h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr style="color:#fff">
+                <td>#</td>
+                <th>Bölüm Adı</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            {
+                count++;
+                <tr style="color:#fff">
+                    <td>@count</td>
+                    <td>@item.MajorName</td>
+                    <td>
+                        <form action="@Url.Action("Delete","Major", new {id = item.Id})" method="post">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Update","Major", new {id=item.Id})" class="btn btn-primary">Güncelle</a>
+                    </td>
 
+                </tr>
+            }
+            <tr>
+                <td colspan="4" class="text-left">
+                    <a href="@Url.Action("CreateMajor","Major")" class="btn btn-lg btn-success"
+                       onmouseover="this.classList.remove('btn-success');
+                    this.classList.add('btn-secondary')" ;
+                       onmouseout="this.classList.remove('btn-secondary');
+                    this.classList.add('btn-success');">
+                        Bölüm Ekle
+                    </a>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
