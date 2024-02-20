@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace School.Dto.Dtos.GetDtos
+{
+    public class ParentJoins
+    { 
+        public string ParentName { get; set; }
+        public string ParentSurname { get; set; }
+        public string ParentContact { get; set; }
+        public string Address { get; set; }
+    }
+}

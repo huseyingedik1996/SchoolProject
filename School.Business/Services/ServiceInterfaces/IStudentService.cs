@@ -1,4 +1,5 @@
 ﻿using School.Common.Response;
+using School.Dto.Dtos.GetDtos;
 using School.Dto.Dtos.StudentDto;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,7 @@ namespace School.Business.Services.ServiceInterfaces
         Task<IResponse> Remove(int id);
 
         Task<IResponse<List<StudentUpdateDto>>> UpdateDtos(StudentUpdateDto updateStudent);
+
+        List<StudentJoins> GetJoins();
     }
 }

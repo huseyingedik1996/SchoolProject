@@ -51,5 +51,12 @@ namespace School.Api.Controllers
             return Ok();
 
         }
+
+        [HttpGet("Students/JoinGetall")]
+        public IActionResult GetJoins()
+        {
+            var datas = _service.GetJoins();
+            return Ok(datas);
+        }
     }
 }

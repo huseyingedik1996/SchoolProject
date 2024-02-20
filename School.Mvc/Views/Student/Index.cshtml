@@ -1,0 +1,47 @@
+﻿@model List<ApiStudentListModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int count = 0;
+}
+
+<div class="container">
+    <table class="table" style="color: white;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Öğrenci Ad-Soyad</th>
+                <th>Öğrenci Numarası</th>
+                <th>Yaş</th>
+                <th>Veli Ad-Soyad</th>
+                <th>Sınıf</th>
+                <th>Bölüm</th>
+                <th>Detaylar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.Name @item.Surname</td>
+                    <td>@item.StudentNumber</td>
+                    <td>@item.Age</td>
+                    <td>@item.BaseDto.ParentName @item.BaseDto.ParentSurname</td>
+                    <td>@item.BaseDto.ClassName</td>
+                    <td>@item.BaseDto.MajorName</td>
+                    <td>
+                        <a href="@Url.Action("CreateMajor","Major")" class="btn btn-lg btn-info"
+                           onmouseover="this.classList.remove('btn-info'); this.classList.add('btn-secondary')"
+                           onmouseout="this.classList.remove('btn-secondary'); this.classList.add('btn-info');">
+                            Detaylar
+                        </a>
+                    </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
