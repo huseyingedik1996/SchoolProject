@@ -1,7 +1,34 @@
-﻿
+﻿@model ApiClasshasMajorUpdateModel
+
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
+
+<div id="oppositeFormTable" class="col-md-12">
+    <form method="post">
+        <div class="card-header">
+            <div class="card-title">Sınıf Güncelleme İşlemi</div>
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="Data.Id" />
+            <div class="form-group">
+                <label for="Data.ClassId">Sınıf Seçin:</label>
+                <select asp-for="Data.ClassesId" class="form-control" asp-items="@(new SelectList(ViewBag.Class, "Id", "ClassName"))">
+                </select>
+                <span asp-validation-for="Data.ClassesId" class="text-danger"></span>
+
+                <label for="Data.MajorId">Bölüm Seçin:</label>
+                <select asp-for="Data.MajorsId" class="form-control" asp-items="@(new SelectList(ViewBag.Major, "Id", "MajorName"))">
+                </select>
+                <span asp-validation-for="Data.MajorsId" class="text-danger"></span>
+        
+            </div>
+        </div>
+        <div class="card-action">
+            <button class="btn btn-success">Güncelle</button>
+        </div>
+    </form>
+</div>

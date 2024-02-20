@@ -1,0 +1,2 @@
+-- Þube Tablosu oluþturulacak ve Katmanda ki iþlemleri yapýlacak
+-- 

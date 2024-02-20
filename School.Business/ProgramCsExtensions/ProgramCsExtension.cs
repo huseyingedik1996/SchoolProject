@@ -30,6 +30,8 @@ using School.Dto.Dtos.StudenthasMajorClassesDto;
 using School.Business.Validations.StudenthasMajorClassValidations;
 using School.Business.Services.ServiceInterfaces;
 using School.Business.Services;
+using School.Dto.Dtos.BranchDto;
+using School.Business.Validations.BranchValidations;
 
 namespace School.Business.ProgramCsExtensions
 {
@@ -87,6 +89,11 @@ namespace School.Business.ProgramCsExtensions
 
             services.AddTransient<IValidator<StudenthasMajorClassesCreateDto>, StudenthasMajorClassCreateValidations>();
             services.AddTransient<IValidator<StudenthasMajorClassesUpdateDto>, StudenthasMajorClassUpdateValidations>();
+
+            services.AddTransient<IValidator<BranchCreateDto>, BranchCreateValidation>();
+            services.AddTransient<IValidator<BranchUpdateDto>, BranchUpdateValidation>();
+
+
 
         }
 

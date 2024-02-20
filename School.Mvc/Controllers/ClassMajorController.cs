@@ -89,13 +89,30 @@ namespace School.Mvc.Controllers
         public async Task<IActionResult> Update(int id)
         {
 
+            //Major class'ına ait tüm verileri ViewBag yoluyla taşıyoruz
+            var client1 = _httpClientFactory.CreateClient();
+            var responseMessage1 = await client1.GetAsync("http://localhost:5287/api/Majors/Major/getall");
+            var jsonData1 = await responseMessage1.Content.ReadAsStringAsync();
+            var values1 = JsonConvert.DeserializeObject<ApiMajorListModel>(jsonData1);
+            ViewBag.Major = values1.Data;
+
+
+            //Major class'ına ait tüm verileri ViewBag yoluyla taşıyoruz
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:5287/api/Classes/Classes/getall");
+            var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+            var values2 = JsonConvert.DeserializeObject<ApiClassListModel>(jsonData2);
+
+            ViewBag.Class = values2.Data;
+
+
 
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:5287/api/MajorhasClasses/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var value = JsonConvert.DeserializeObject<ApiClassUpdateModel>(jsonData);
+                var value = JsonConvert.DeserializeObject<ApiClasshasMajorUpdateModel>(jsonData);
                 return View(value);
             }
             else

@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Common", "School.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Dto", "School.Dto\School.Dto.csproj", "{11E12A5B-4193-420E-A751-688CDF59B7BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Mvc", "School.Mvc\School.Mvc.csproj", "{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Mvc", "School.Mvc\School.Mvc.csproj", "{A1FA4EC0-97E2-4418-A30F-C5CE7B2F7142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDoList", "ToDoList", "{4E9A0097-6765-4AA3-A430-D87ED51EA817}"
+	ProjectSection(SolutionItems) = preProject
+		Yapılacaklar.txt = Yapılacaklar.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
