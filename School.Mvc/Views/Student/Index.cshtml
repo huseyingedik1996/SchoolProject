@@ -46,12 +46,21 @@
                             <button type="submit" class="btn btn-danger">Sil</button>
                         </form>
                     </td>
+                    
                     <td>
                         <a href="@Url.Action("Update", "Student", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
                     </td>
                 </tr>
             }
+
             
         </tbody>
     </table>
+    <td colspan="4" class="text-left">
+        <a href="@Url.Action("Create", "Student")" class="btn btn-lg btn-success"
+           onmouseover="this.classList.remove('btn-success'); this.classList.add('btn-secondary');"
+           onmouseout="this.classList.remove('btn-secondary'); this.classList.add('btn-success');">
+            Öğrenci Ekle
+        </a>
+    </td>
 </div>

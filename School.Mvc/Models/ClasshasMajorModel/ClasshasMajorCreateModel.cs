@@ -5,5 +5,6 @@
         public int ClassesId { get; set; }
         public int MajorsId { get; set; }
 
+
     }
 }

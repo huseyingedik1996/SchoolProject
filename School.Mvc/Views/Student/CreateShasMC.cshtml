@@ -1,0 +1,23 @@
+﻿@model StudenthasMajorClassCreateModel
+@{
+    ViewData["Title"] = "CreateShasMC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="oppositeFormTable" class="col-md-12">
+    <form asp-action="CreateClassMajor" method="post">
+        <div class="card-header">
+            <div class="card-title">Yeni Sınıf/Bölüm Oluştur</div>
+        </div>
+
+        <div class="form-group">
+
+            <label for="MajorhasClassesId">Sınıf Seçin:</label>
+            <select asp-for="MajorhasClassesId" class="form-control" asp-items="@(new SelectList(ViewBag.MC, "Id", "MajorName"))">
+            </select>
+            <span asp-validation-for="MajorhasClassesId" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Ekle</button>
+    </form>
+</div>
+
