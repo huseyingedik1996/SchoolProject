@@ -22,5 +22,7 @@ namespace School.Business.Services.ServiceInterfaces
         Task<IResponse<List<StudentUpdateDto>>> UpdateDtos(StudentUpdateDto updateStudent);
 
         List<StudentJoins> GetJoins();
+
+        StudentJoins GetByIdJoins(int id);
     }
 }

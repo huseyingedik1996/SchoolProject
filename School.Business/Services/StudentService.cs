@@ -113,6 +113,7 @@ namespace School.Business.Services
 
                            select new StudentJoins
                            {
+                               Id = _student.Id,
                                Name = _student.Name,
                                Surname = _student.Surname,
                                TCNumber = _student.TCNumber,
@@ -138,6 +139,61 @@ namespace School.Business.Services
 
             return joinInfo.ToList();
         }
+
+        public StudentJoins GetByIdJoins(int id)
+        {
+            var joinInfo = from _fullGroup in _context.StudenthasMajorClasses
+
+                           join _class in _context.MajorClasses
+                           on _fullGroup.MajorhasClassesId equals _class.Id
+
+                           join _className in _context.Classes on _class.ClassesId equals _className.Id into classGroup
+                           from _className in classGroup.DefaultIfEmpty()
+
+                           join _majorName in _context.Majors on _class.MajorsId equals _majorName.Id into majorGroup
+                           from _majorName in majorGroup.DefaultIfEmpty()
+
+                           join _student in _context.Students
+                           on _fullGroup.StudentsId equals _student.Id
+
+                           join _parents in _context.Parents on _student.Id equals _parents.StudentId into parentsGroup
+                           from _parents in parentsGroup.DefaultIfEmpty()
+
+                           join _register in _context.RegistersInfo
+                           on _student.Id equals _register.StudentId
+
+
+
+
+                           select new StudentJoins
+                           {
+                               Id = _student.Id,
+                               Name = _student.Name,
+                               Surname = _student.Surname,
+                               TCNumber = _student.TCNumber,
+                               StudentNumber = _student.StudentNumber,
+                               Address = _student.Address,
+                               City = _student.City,
+                               Region = _student.Region,
+                               BirthDay = _student.BirthDay,
+                               Age = _student.Age,
+                               Contact = _student.Contact,
+                               RegisterDate = _student.RegisterDate,
+                               BaseDto = new BaseDto
+                               {
+                                   ClassName = _className.ClassName,
+                                   MajorName = _majorName.MajorName,
+                                   Email = _register.Email,
+                                   Password = _register.Password,
+                                   ParentName = _parents.ParentName,
+                                   ParentSurname = _parents.ParentSurname,
+                                   ParentContact = _parents.ParentContact
+                               }
+                           };
+
+            return joinInfo.Where(x => x.Id == id).FirstOrDefault();
+        }
+
 
         public async Task<IResponse<StudentListDto>> GetById(int id)
         {

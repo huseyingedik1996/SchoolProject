@@ -33,11 +33,21 @@
                     <td>@item.BaseDto.ClassName</td>
                     <td>@item.BaseDto.MajorName</td>
                     <td>
-                        <a href="@Url.Action("CreateMajor","Major")" class="btn btn-lg btn-info"
+                        <a href="@Url.Action("Details","Student", new { id = item.Id })" class="btn btn-lg btn-info"
                            onmouseover="this.classList.remove('btn-info'); this.classList.add('btn-secondary')"
                            onmouseout="this.classList.remove('btn-secondary'); this.classList.add('btn-info');">
                             Detaylar
                         </a>
+
+
+                    </td>
+                    <td>
+                        <form action="@Url.Action("Delete", "Student", new { id = item.Id })" method="post">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Update", "Student", new { id = item.Id })" class="btn btn-primary">Güncelle</a>
                     </td>
                 </tr>
             }

@@ -29,14 +29,50 @@ namespace School.Mvc.Controllers
                 }
                 catch (JsonSerializationException ex)
                 {
-                    // Dönüşüm hatası
-                    // Hatanın nedenini inceleyin veya hata iletisini kaydedin
-                    // JSON formatını kontrol edin ve dönüşüm işlemini düzeltin
-                    //return RedirectToAction("Error");
+                    
                     throw new Exception("JSON dönüşüm hatası", ex);
                 }
             }
             return View();
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:5287/api/Student/{id}/Students/GetbyId");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                try
+                {
+                    var values = JsonConvert.DeserializeObject<ApiStudentListModel>(jsonData);
+                    return View(values);
+                }
+                catch (JsonSerializationException ex)
+                {
+
+                    throw new Exception("JSON dönüşüm hatası", ex);
+                }
+            }
+
+            return View();
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+           
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"http://localhost:5287/api/Student/{id}/delete");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

@@ -58,5 +58,12 @@ namespace School.Api.Controllers
             var datas = _service.GetJoins();
             return Ok(datas);
         }
+
+        [HttpGet("{id}/Students/GetbyId")]
+        public IActionResult GetByIdJoins(int id)
+        {
+            var data = _service.GetByIdJoins(id);
+            return Ok(data);
+        }
     }
 }

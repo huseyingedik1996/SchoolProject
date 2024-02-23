@@ -8,6 +8,7 @@ namespace School.Dto.Dtos.GetDtos
 {
     public class StudentJoins
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string TCNumber { get; set; }

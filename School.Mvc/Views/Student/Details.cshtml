@@ -1,0 +1,69 @@
+﻿@model ApiStudentListModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="container">
+    <table class="table" style="color: white;">
+        <tbody>
+            <tr>
+                <th>Öğrenci Ad-Soyad</th>
+                <td>@Model.Name @Model.Surname</td>
+            </tr>
+            <tr>
+                <th>Öğrenci Numarası</th>
+                <td>@Model.StudentNumber</td>
+            </tr>
+            <tr>
+                <th>Adres</th>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <th>Şehir</th>
+                <td>@Model.City</td>
+            </tr>
+            <tr>
+                <th>Ülke</th>
+                <td>@Model.Region</td>
+            </tr>
+            <tr>
+                <th>Yaş</th>
+                <td>@Model.Age</td>
+            </tr>
+            <tr>
+                <th>İletişim</th>
+                <td>@Model.Contact</td>
+            </tr>
+            <tr>
+                <th>Kayıt Tarihi</th>
+                <td>@Model.RegisterDate</td>
+            </tr>
+            <tr>
+                <th>Sınıf</th>
+                <td>@Model.BaseDto.ClassName</td>
+            </tr>
+            <tr>
+                <th>Bölüm</th>
+                <td>@Model.BaseDto.MajorName</td>
+            </tr>
+            <tr>
+                <th>E-Mail</th>
+                <td>@Model.BaseDto.Email</td>
+            </tr>
+            <tr>
+                <th>Şifre</th>
+                <td>@Model.BaseDto.Password</td>
+            </tr>
+            <tr>
+                <th>Veli Ad-Soyad</th>
+                <td>@Model.BaseDto.ParentName @Model.BaseDto.ParentSurname</td>
+            </tr>
+            <tr>
+                <th>Veli İletişim</th>
+                <td>@Model.BaseDto.ParentContact</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
