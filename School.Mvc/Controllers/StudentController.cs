@@ -121,11 +121,12 @@ namespace School.Mvc.Controllers
 		public async Task<IActionResult> CreateShasMC()
 		{
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5287/api/MajorhasClasses/MajorhasClasses/getall");
+            var responseMessage = await client.GetAsync("http://localhost:5287/api/MajorhasClasses/MajorhasClasses/getallef");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ClasshasMajorListModel>>(jsonData);
+            // Controller tarafında ViewBag.MC'yi oluştururken
+            ViewBag.MC = values.Select(item => new { Id = item.Id, CombinedName = $"{item.ClassName}/ {item.MajorName}" }).ToList();
 
-            ViewBag.MC = values;
             return View(); 
         }
 
@@ -139,7 +140,7 @@ namespace School.Mvc.Controllers
 			var responseMessage = await client.PostAsync("http://localhost:5287/api/StudenthasMajorClasseshasMajorClasses/StudenthasMajorClasses/create", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
-				return RedirectToAction("CreateShasMC");
+				return RedirectToAction("Index");
 			}
 
 			return View();

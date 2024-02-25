@@ -5,19 +5,19 @@
 }
 
 <div id="oppositeFormTable" class="col-md-12">
-    <form asp-action="CreateClassMajor" method="post">
+    <form asp-action="CreateShasMC" method="post">
         <div class="card-header">
-            <div class="card-title">Yeni Sınıf/Bölüm Oluştur</div>
+            <div class="card-title">Sınıf/Bölüm Seç</div>
         </div>
 
         <div class="form-group">
 
             <label for="MajorhasClassesId">Sınıf Seçin:</label>
-            <select asp-for="MajorhasClassesId" class="form-control" asp-items="@(new SelectList(ViewBag.MC, "Id", "MajorName"))">
+            <select asp-for="MajorhasClassesId" class="form-control" asp-items="@(new SelectList(ViewBag.MC, "Id", "CombinedName"))">
             </select>
             <span asp-validation-for="MajorhasClassesId" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Ekle</button>
+        <button type="submit" class="btn btn-primary">Seç</button>
     </form>
 </div>
 
