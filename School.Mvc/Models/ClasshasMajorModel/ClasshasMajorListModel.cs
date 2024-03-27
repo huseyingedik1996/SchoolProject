@@ -7,5 +7,6 @@
         public int MajorsId { get; set; }
         public string MajorName { get; set; }
         public string ClassName { get; set; }
+
     }
 }

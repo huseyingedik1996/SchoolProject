@@ -1,0 +1,52 @@
+﻿@model ParentCreateModel
+@{
+    ViewData["Title"] = "CreateParent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	.btn-container {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		margin-bottom: 100px; /* Optional: Add some margin to the bottom */
+		margin-right: 200px; /* Optional: Add some margin to the right */
+	}
+</style>
+
+
+<div id="oppositeFormTable" class="col-md-12">
+	<form method="post">
+		<div class="card-header">
+			<div class="card-title">Yeni Öğrenci Girişi</div>
+		</div>
+		<div class="card-body">
+			<div class="form-group">
+				<label for="Name">Ad</label>
+				<input type="text" asp-for="ParentName" class="form-control" id="Name">
+				<span asp-validation-for="ParentSurname" class="text-danger"></span>
+
+				<label for="Surname">Soyad</label>
+				<input type="text" asp-for="ParentSurname" class="form-control" id="Surname">
+				<span asp-validation-for="ParentSurname" class="text-danger"></span>
+
+				<label for="ParentContact">İletişim</label>
+				<input type="text" asp-for="ParentContact" class="form-control" id="ParentContact">
+				<span asp-validation-for="ParentContact" class="text-danger"></span>
+
+				<label for="Adress">Adres</label>
+				<input type="text" asp-for="Address" class="form-control" id="Adress">
+				<span asp-validation-for="Address" class="text-danger"></span>
+
+
+			</div>
+		</div>
+		<div class="btn-container">
+			<td colspan="4" class="text-left">
+				<button type="submit" class="btn btn-primary">İleri</button>
+			</td>
+		</div>
+	</form>
+</div>
+
+

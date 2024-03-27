@@ -16,7 +16,7 @@ namespace School.Api.Controllers
         }
 
         [HttpPost("student/create")]
-        public async Task<IActionResult> Create([FromBody] StudentCreateDto createDto)
+        public async Task<IActionResult> Create(StudentCreateDto createDto)
         {
             var created = await _service.Create(createDto);
             return Ok(created);
