@@ -13,11 +13,12 @@ using School.Dto.Dtos.StudentDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace School.Business.Services
-{ 
+{
     public class StudentService : IStudentService
     {
         private readonly IMapper _mapper;
@@ -46,7 +47,7 @@ namespace School.Business.Services
                 createStudent.Email = ($"{createStudent.Name}{createStudent.Surname}@school.com");
                 createStudent.Password = GenerateUniqueStudentNumber().ToString();
 
-                
+
 
                 await _uow.GetRepositores<Students>().Create(_mapper.Map<Students>(createStudent));
 
@@ -245,10 +246,37 @@ namespace School.Business.Services
             // For example, concatenate current timestamp and a random number
             Random random = new Random();
             int randomPart = random.Next(100000, 999999); // Change the range based on your requirements
-            
+
             string uniqueStudentNumber = randomPart.ToString();
 
             return int.Parse(uniqueStudentNumber);
+        }
+
+        public List<Students> Search(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+                return new List<Students>();
+
+          
+            string data = char.ToUpper(query[0]) + query.Substring(1);
+
+            var students = _context.Students
+                                    .Where(s => s.Name.Contains(query) || s.Surname.Contains(query) || s.Name.Contains(data))
+                                    .ToList();
+
+            return students;
+        }
+
+        public async Task<List<StudentListDto>> SearchAlphabeticly()
+        {
+            var students = await _uow.GetRepositores<Students>().GetAll();
+            var sortedStudents = students.OrderBy(s => s.Name)
+                                         .ThenBy(s => s.Surname)
+                                         .ToList();
+
+            var data = _mapper.Map<List<StudentListDto>>(sortedStudents);
+
+            return data;
         }
     }
 }

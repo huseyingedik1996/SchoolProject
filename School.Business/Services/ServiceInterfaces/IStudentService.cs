@@ -1,4 +1,5 @@
 ﻿using School.Common.Response;
+using School.DataAccess.Models;
 using School.Dto.Dtos.GetDtos;
 using School.Dto.Dtos.StudentDto;
 using System;
@@ -24,5 +25,9 @@ namespace School.Business.Services.ServiceInterfaces
         List<StudentJoins> GetJoins();
 
         StudentJoins GetByIdJoins(int id);
+
+        List<Students> Search(string query);
+
+        Task<List<StudentListDto>> SearchAlphabeticly();
     }
 }

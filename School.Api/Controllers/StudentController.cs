@@ -65,5 +65,20 @@ namespace School.Api.Controllers
             var data = _service.GetByIdJoins(id);
             return Ok(data);
         }
+
+        [HttpGet("students/search")]
+        public IActionResult SearchStudent(string query)
+        {
+           var data = _service.Search(query);
+            return Ok(data);
+        }
+
+        [HttpGet("oderByName")]
+        public IActionResult SearchAlphabeticly()
+        {
+            var data = _service.SearchAlphabeticly();
+
+            return Ok(data);
+        }
     }
 }

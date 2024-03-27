@@ -74,5 +74,30 @@ namespace School.Mvc.Controllers
                 return View();
             }
         }
+
+
+        public async Task<IActionResult> SearchStudent(string query)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:5287/api/Student/students/search?query={query}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                try
+                {
+                    var values = JsonConvert.DeserializeObject<ApiStudentListModel>(jsonData);
+                    return View(values);
+                }
+                catch (JsonSerializationException ex)
+                {
+
+                    throw new Exception("JSON dönüşüm hatası", ex);
+                }
+            }
+
+            return View();
+        }
+
+        
     }
 }
