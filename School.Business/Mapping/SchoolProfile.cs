@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using School.DataAccess.Models;
 using School.Dto.Dtos.ClassDtos;
+using School.Dto.Dtos.DepartmantHasMajorClass;
+using School.Dto.Dtos.DepartmantName;
 using School.Dto.Dtos.MajorDtos;
 using School.Dto.Dtos.MajorhasClassesDto;
 using School.Dto.Dtos.ParentsDtos;
+using School.Dto.Dtos.StudentDepartmanDto;
 using School.Dto.Dtos.StudentDto;
 using School.Dto.Dtos.StudenthasMajorClassesDto;
 using System;
@@ -50,6 +53,21 @@ namespace School.Business.Mapping
             CreateMap<StudenthasMajorClass,StudenthasMajorClassesCreateDto>().ReverseMap();
             CreateMap<StudenthasMajorClass,StudenthasMajorClassesUpdateDto>().ReverseMap();
             CreateMap<StudenthasMajorClassesListDto,StudenthasMajorClassesUpdateDto>().ReverseMap();
+
+            CreateMap<DepartmantName, CreateDepartmantName>().ReverseMap();
+            CreateMap<DepartmantName, ListDepartmantName>().ReverseMap();
+            CreateMap<DepartmantName, UpdateDepartmantName>().ReverseMap();
+            CreateMap<ListDepartmantName, UpdateDepartmantName>().ReverseMap();
+
+            CreateMap<DepartmantHasMajorClass, CreateDepartmanHasMajorClass>().ReverseMap();
+            CreateMap<DepartmantHasMajorClass, ListDepartmanHasMajorClass>().ReverseMap();
+            CreateMap<DepartmantHasMajorClass, UpdateDepartmanHasMajorClass>().ReverseMap();
+            CreateMap<ListDepartmanHasMajorClass, UpdateDepartmanHasMajorClass>().ReverseMap();
+
+            CreateMap<StudentsDepartmant, CreateStudentsDepartmant>().ReverseMap();
+            CreateMap<StudentsDepartmant, ListStudentsDepartmant>().ReverseMap();
+            CreateMap<StudentsDepartmant,  UpdateStudentsDepartmant>().ReverseMap();
+            CreateMap<ListStudentsDepartmant, UpdateStudentsDepartmant>().ReverseMap();
         }
     }
 }

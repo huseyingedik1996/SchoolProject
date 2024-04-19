@@ -32,6 +32,12 @@ using School.Business.Services.ServiceInterfaces;
 using School.Business.Services;
 using School.Dto.Dtos.BranchDto;
 using School.Business.Validations.BranchValidations;
+using School.Dto.Dtos.DepartmantName;
+using School.Business.Validations.StudentsDepartmanValidations;
+using School.Business.Validations.DepartmantNameValidations;
+using School.Dto.Dtos.DepartmantHasMajorClass;
+using School.Business.Validations.DepartmanHasClassMajorValidations;
+using School.Dto.Dtos.StudentDepartmanDto;
 
 namespace School.Business.ProgramCsExtensions
 {
@@ -70,6 +76,9 @@ namespace School.Business.ProgramCsExtensions
             services.AddScoped<IStudenthasMajorClassService,StudenthasMajorClassesService>();
             services.AddScoped<IParentService, ParentService>();
             services.AddScoped<IMajorhasClassService, MajorhasClassService>();
+            services.AddScoped<IDepartmanNameService, DepartmanNameService>();
+            services.AddScoped<IDepartmanHasClassMajorService, DepartmanHasClassMajorService>();
+            services.AddScoped<IStudentsDepartmanService, StudentDepartmantService>();
 
 
             services.AddTransient<IValidator<StudentCreateDto>, StudentCreateValidations>();
@@ -92,6 +101,15 @@ namespace School.Business.ProgramCsExtensions
 
             services.AddTransient<IValidator<BranchCreateDto>, BranchCreateValidation>();
             services.AddTransient<IValidator<BranchUpdateDto>, BranchUpdateValidation>();
+
+            services.AddTransient<IValidator<CreateDepartmantName>, DepartmanNameCreateValidation>();
+            services.AddTransient<IValidator<UpdateDepartmantName>, DepartmantNameUpdateValidation>();
+
+            services.AddTransient<IValidator<CreateDepartmanHasMajorClass>, CreateDepartmanHasClassMajorValidation>();
+            services.AddTransient<IValidator<UpdateDepartmanHasMajorClass>, UpdateDepartmantHasClassMajorValidation>();
+
+            services.AddTransient<IValidator<CreateStudentsDepartmant>, CreateStudentsDepartmanValidation>();
+            services.AddTransient<IValidator<UpdateStudentsDepartmant>, UpdateStudentsDepartmanValidation>();
 
 
 

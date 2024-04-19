@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace School.DataAccess.Models
+namespace School.Dto.Dtos.DepartmantName
 {
-    public class DepartmantName
+    public class UpdateDepartmantName
     {
         public int Id { get; set; }
-        public int Size { get; set; }
         public string Name { get; set; }
 
-        public List<DepartmantHasMajorClass> HasMajorClass { get; set; }
     }
 }
