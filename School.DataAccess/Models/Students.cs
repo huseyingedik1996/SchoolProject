@@ -27,6 +27,7 @@ namespace School.DataAccess.Models
 
         public AppUser AppUser { get; set; }
         public List<StudenthasMajorClass> StudenthasMajorClasses { get; set; }
+        public List<StudentsDepartmant> StudentsDepartmant { get; set; }
 
     }
 }

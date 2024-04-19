@@ -23,7 +23,7 @@ namespace School.DataAccess.Context
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<DepartmantName> DepartmantNames { get; set; }
         public virtual DbSet<DepartmantHasMajorClass> DepartmantHasMajorClasses { get; set; }
-
+        public virtual DbSet<StudentsDepartmant> StudentsDepartmant { get; set; }
 
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options) 
         {

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.DataAccess.Context;
 
@@ -10,9 +11,11 @@ using School.DataAccess.Context;
 namespace School.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20240419180016_Departmant3")]
+    partial class Departmant3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -250,6 +253,9 @@ namespace School.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("DepartmantId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("DepartmantNameId")
                         .HasColumnType("INTEGER");
 
@@ -453,17 +459,23 @@ namespace School.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DepartmantHasMajorClassId")
+                    b.Property<int>("DepartmantHasMajorClass")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DepartmantHasMinorClassId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmantHasMajorClassId");
+                    b.HasIndex("DepartmantHasMinorClassId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentsId");
 
                     b.ToTable("StudentsDepartmant");
                 });
@@ -611,21 +623,21 @@ namespace School.DataAccess.Migrations
 
             modelBuilder.Entity("School.DataAccess.Models.StudentsDepartmant", b =>
                 {
-                    b.HasOne("School.DataAccess.Models.DepartmantHasMajorClass", "DepartmantHasMajorClass")
+                    b.HasOne("School.DataAccess.Models.DepartmantHasMajorClass", "DepartmantHasMinorClass")
                         .WithMany("StudentsDepartmant")
-                        .HasForeignKey("DepartmantHasMajorClassId")
+                        .HasForeignKey("DepartmantHasMinorClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School.DataAccess.Models.Students", "Student")
+                    b.HasOne("School.DataAccess.Models.Students", "Students")
                         .WithMany("StudentsDepartmant")
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DepartmantHasMajorClass");
+                    b.Navigation("DepartmantHasMinorClass");
 
-                    b.Navigation("Student");
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("School.DataAccess.Models.Classes", b =>

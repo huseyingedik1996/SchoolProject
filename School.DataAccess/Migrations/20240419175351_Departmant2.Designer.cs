@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.DataAccess.Context;
 
@@ -10,9 +11,11 @@ using School.DataAccess.Context;
 namespace School.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20240419175351_Departmant2")]
+    partial class Departmant2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -250,17 +253,20 @@ namespace School.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("DepartmantId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("DepartmantNameId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MajorHasClassId")
+                    b.Property<int>("StudentHasMajorHasClassId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmantNameId");
 
-                    b.HasIndex("MajorHasClassId");
+                    b.HasIndex("StudentHasMajorHasClassId");
 
                     b.ToTable("DepartmantHasMajorClasses");
                 });
@@ -447,27 +453,6 @@ namespace School.DataAccess.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("School.DataAccess.Models.StudentsDepartmant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DepartmantHasMajorClassId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmantHasMajorClassId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentsDepartmant");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("School.DataAccess.Models.AppRole", null)
@@ -538,15 +523,15 @@ namespace School.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School.DataAccess.Models.MajorhasClass", "MajorHasClass")
-                        .WithMany("MajorClass")
-                        .HasForeignKey("MajorHasClassId")
+                    b.HasOne("School.DataAccess.Models.StudenthasMajorClass", "StudentHasMajorHasClass")
+                        .WithMany("StudentHasMajorClass")
+                        .HasForeignKey("StudentHasMajorHasClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DepartmantName");
 
-                    b.Navigation("MajorHasClass");
+                    b.Navigation("StudentHasMajorHasClass");
                 });
 
             modelBuilder.Entity("School.DataAccess.Models.MajorhasClass", b =>
@@ -609,33 +594,9 @@ namespace School.DataAccess.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("School.DataAccess.Models.StudentsDepartmant", b =>
-                {
-                    b.HasOne("School.DataAccess.Models.DepartmantHasMajorClass", "DepartmantHasMajorClass")
-                        .WithMany("StudentsDepartmant")
-                        .HasForeignKey("DepartmantHasMajorClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("School.DataAccess.Models.Students", "Student")
-                        .WithMany("StudentsDepartmant")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DepartmantHasMajorClass");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("School.DataAccess.Models.Classes", b =>
                 {
                     b.Navigation("MajorhasClasses");
-                });
-
-            modelBuilder.Entity("School.DataAccess.Models.DepartmantHasMajorClass", b =>
-                {
-                    b.Navigation("StudentsDepartmant");
                 });
 
             modelBuilder.Entity("School.DataAccess.Models.DepartmantName", b =>
@@ -645,8 +606,6 @@ namespace School.DataAccess.Migrations
 
             modelBuilder.Entity("School.DataAccess.Models.MajorhasClass", b =>
                 {
-                    b.Navigation("MajorClass");
-
                     b.Navigation("StudenthasMajorClasses");
                 });
 
@@ -655,14 +614,17 @@ namespace School.DataAccess.Migrations
                     b.Navigation("MajorhasClasses");
                 });
 
+            modelBuilder.Entity("School.DataAccess.Models.StudenthasMajorClass", b =>
+                {
+                    b.Navigation("StudentHasMajorClass");
+                });
+
             modelBuilder.Entity("School.DataAccess.Models.Students", b =>
                 {
                     b.Navigation("AppUser")
                         .IsRequired();
 
                     b.Navigation("StudenthasMajorClasses");
-
-                    b.Navigation("StudentsDepartmant");
                 });
 #pragma warning restore 612, 618
         }

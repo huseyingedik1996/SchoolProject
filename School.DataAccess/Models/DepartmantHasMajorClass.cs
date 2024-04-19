@@ -9,10 +9,12 @@ namespace School.DataAccess.Models
     public class DepartmantHasMajorClass
     {
         public int Id { get; set; }
-        public int DepartmantId { get; set; }
+        public int DepartmantNameId { get; set; }
         public int MajorHasClassId { get; set; }
 
         public DepartmantName DepartmantName { get; set; }
         public MajorhasClass MajorHasClass { get; set; }
+        public List<StudentsDepartmant> StudentsDepartmant { get; set; }
+
     }
 }
