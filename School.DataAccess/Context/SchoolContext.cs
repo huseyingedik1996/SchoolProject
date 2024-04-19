@@ -21,6 +21,8 @@ namespace School.DataAccess.Context
         public virtual DbSet<StudenthasMajorClass> StudenthasMajorClasses { get; set; }
         public virtual DbSet<RegisterInfo> RegistersInfo { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
+        public virtual DbSet<DepartmantName> DepartmantNames { get; set; }
+        public virtual DbSet<DepartmantHasMajorClass> DepartmantHasMajorClasses { get; set; }
 
 
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options) 

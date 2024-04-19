@@ -16,5 +16,6 @@ namespace School.DataAccess.Models
         public Classes Classes { get; set; }
         public Majors Majors { get; set; }
         public List<StudenthasMajorClass> StudenthasMajorClasses { get; set; }
+        public List<DepartmantHasMajorClass> HasMajorClass { get; set; }
     }
 }
