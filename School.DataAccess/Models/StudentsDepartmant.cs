@@ -9,6 +9,8 @@ namespace School.DataAccess.Models
     public class StudentsDepartmant
     {
         public int Id { get; set; }
+        public int Size { get; set; }
+
         public int StudentId { get; set; }
         public int DepartmantHasMajorClassId { get; set; }
 

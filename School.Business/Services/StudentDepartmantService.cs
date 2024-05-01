@@ -41,16 +41,15 @@ namespace School.Business.Services
 
         public async Task<IResponse<CreateStudentsDepartmant>> Create(CreateStudentsDepartmant createClass)
         {
-            var student = _mapper.Map<List<StudentListDto>>(_uow.GetRepositores<Students>().GetAll);
-            var studentHasMajorClasses = _mapper.Map<List<StudenthasMajorClassesListDto>>(_uow.GetRepositores<StudenthasMajorClass>().GetAll);
-            var departmants = _mapper.Map<List<ListDepartmanHasMajorClass>>(_uow.GetRepositores<DepartmantHasMajorClass>().GetAll);
+            var student = _mapper.Map<List<StudentListDto>>(await _uow.GetRepositores<Students>().GetAll());
+            var studentHasMajorClasses = _mapper.Map<List<StudenthasMajorClassesListDto>>(await _uow.GetRepositores<StudenthasMajorClass>().GetAll());
+            var departmants = _mapper.Map<List<ListDepartmanHasMajorClass>>(await _uow.GetRepositores<DepartmantHasMajorClass>().GetAll());
 
             
 
             var validationResult = _createValidator.Validate(createClass);
             if (validationResult.IsValid)
             {
-                await _uow.GetRepositores<StudentsDepartmant>().Create(_mapper.Map<StudentsDepartmant>(createClass));
 
                 int sayac = 0;
                 int data = createClass.Size;
@@ -59,11 +58,24 @@ namespace School.Business.Services
                 {
                     foreach (var departmant in departmants)
                     {
-                        if (students.MajorhasClassesId == departmant.MajorHasClassId && students.StudentsId != Convert.ToInt64(checkStudent))
+                        if (students.MajorhasClassesId == departmant.MajorHasClassId/* && students.StudentsId != Convert.ToInt64(checkStudent)*/)
                         {
-                            while(sayac < data)
+                            
+                            while(sayac <= data)
                             {
-                                
+                                sayac++;
+
+                                StudentsDepartmant department = new()
+                                {
+                                    DepartmantHasMajorClassId = createClass.DepartmantHasMajorClassId,
+                                    StudentId = students.StudentsId,
+                                    Size = createClass.Size
+                                    
+
+                                };
+                               
+                                _context.StudentsDepartmant.Add(department);
+                                _context.SaveChanges();
                             }
                         }
                     }

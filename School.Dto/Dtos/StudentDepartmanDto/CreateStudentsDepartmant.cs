@@ -8,6 +8,8 @@ namespace School.Dto.Dtos.StudentDepartmanDto
 {
     public class CreateStudentsDepartmant
     {
+        public int Size { get; set; }
+
         public int DepartmantHasMajorClassId { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace School.Dto.Dtos.DepartmantName
     public class ListDepartmantName
     {
         public int Id { get; set; }
+        
         public string Name { get; set; }
 
     }

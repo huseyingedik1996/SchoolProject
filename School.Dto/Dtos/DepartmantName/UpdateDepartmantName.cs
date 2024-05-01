@@ -9,6 +9,7 @@ namespace School.Dto.Dtos.DepartmantName
     public class UpdateDepartmantName
     {
         public int Id { get; set; }
+        
         public string Name { get; set; }
 
     }
