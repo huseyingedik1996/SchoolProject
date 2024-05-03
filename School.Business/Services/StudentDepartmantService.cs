@@ -15,6 +15,7 @@ using School.Dto.Dtos.StudentDto;
 using School.Dto.Dtos.StudenthasMajorClassesDto;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace School.Business.Services
         private readonly IValidator<UpdateStudentsDepartmant> _updateValidator;
         private readonly SchoolContext _context;
 
-        public StudentDepartmantService(IMapper mapper, IUnitOfWork uow, IValidator<CreateStudentsDepartmant> createValidator, 
+        public StudentDepartmantService(IMapper mapper, IUnitOfWork uow, IValidator<CreateStudentsDepartmant> createValidator,
             IValidator<UpdateStudentsDepartmant> updateValidator, SchoolContext context)
         {
             _mapper = mapper;
@@ -44,40 +45,50 @@ namespace School.Business.Services
             var student = _mapper.Map<List<StudentListDto>>(await _uow.GetRepositores<Students>().GetAll());
             var studentHasMajorClasses = _mapper.Map<List<StudenthasMajorClassesListDto>>(await _uow.GetRepositores<StudenthasMajorClass>().GetAll());
             var departmants = _mapper.Map<List<ListDepartmanHasMajorClass>>(await _uow.GetRepositores<DepartmantHasMajorClass>().GetAll());
+            var checkStudent = _mapper.Map<List<ListStudentsDepartmant>>(await _uow.GetRepositores<StudentsDepartmant>().GetAll());
 
-            
+
 
             var validationResult = _createValidator.Validate(createClass);
             if (validationResult.IsValid)
             {
-
                 int sayac = 0;
                 int data = createClass.Size;
-                var checkStudent = _context.StudentsDepartmant.Select(x => x.StudentId);
-                foreach (var students in studentHasMajorClasses)
+
+                while (sayac < data)
                 {
-                    foreach (var departmant in departmants)
+
+                    foreach (var students in studentHasMajorClasses)
                     {
-                        if (students.MajorhasClassesId == departmant.MajorHasClassId/* && students.StudentsId != Convert.ToInt64(checkStudent)*/)
+                        var studentsToCheck = students.StudentsId;
+
+                        foreach (var departmant in departmants)
                         {
-                            
-                            while(sayac <= data)
+
+                            if (students.MajorhasClassesId == departmant.MajorHasClassId)
                             {
-                                sayac++;
 
                                 StudentsDepartmant department = new()
                                 {
                                     DepartmantHasMajorClassId = createClass.DepartmantHasMajorClassId,
                                     StudentId = students.StudentsId,
                                     Size = createClass.Size
-                                    
-
                                 };
-                               
-                                _context.StudentsDepartmant.Add(department);
-                                _context.SaveChanges();
+
+                                if (_context.StudentsDepartmant.Any(x => x.StudentId != department.StudentId))
+                                {
+                                    _context.StudentsDepartmant.Add(department);
+                                    sayac++;
+                                    _context.SaveChanges();
+                                }
+
+
+
+
                             }
+
                         }
+
                     }
                 }
 
